@@ -1,0 +1,56 @@
+tailwind.config = {
+    theme: {
+      extend: {
+        screens: {
+          'md': {'max': '980px'},
+          'sm': {'max': '550px'},
+        },
+        colors: {
+          sadLightGray:'#e9ecef',
+          veryLightishGray:'#0000001a',
+          veryLightyishGray:'#dee2e6',
+          veryLightyGray:'#0000002d',
+          veryLightGray: '#d3d3d3',
+          lightGray:'#666',
+          softGray:'#222',
+          mediumGray:'#333',
+          lightBlue:'#007bff',
+          black:'#000',
+          success:'#28a745',
+          teal:'#20c997',
+          green:'#28a745',
+          danger:'#dc3545',
+          secondary:'#6c757d',
+          successDarker:'#1b5e20',
+          lightBlueDarker:'#01579b',
+          cyan:'#0dcaf0',
+          indigo:'#6610f2',
+          orange:'#fd7e14',
+          yellow:'#f8f8ba',
+          purple:'#6f42c1',
+          info:'#17a2b8',
+          live:'#83A2FF',
+        },
+        maxWidth:{
+          1175:'1175px',
+          250:'250px',
+          280:'280px',
+          300:'300px',
+          200:'200px',
+          150:'150px',
+          120:'120px',
+          100:'100px',        
+        },
+        minHeight:{
+          100:'100px',
+        },
+        maxHeight:{
+          100:'100px'
+        },
+        gridTemplateColumns:{
+          '250':'250px auto'
+        },
+   
+      }
+    }
+  }
