@@ -1,7 +1,7 @@
 <x-layout>
     
         <!--Websites Section-->
-        <section class="roboto mx-auto mt-20 bg-white rounded-lg card max-w-1175 mb-5 text-gray-900">
+        <section class="roboto mx-auto mt-20 bg-white rounded-lg card max-w-1175 mb-5 text-softGray">
         
                 <div class="mb-5 p-4 border-b border-veryLightyGray">Manage Websites</div>
                 <div class="custom-page-length"></div>
@@ -18,12 +18,25 @@
                 data:websitesRecord,
                 columns:[
                         {data:'id',title:'ID',className:'align-top hidden md:block'},
-                        {data:'status',title:'Status',className:'align-top w-32',   
+                        {data:'status',title:'STATUS',className:'align-top w-32',   
                                 render: function(data, type, row, meta) {
-                                   return `<div class="py-2 mt-3 text-white text-center bg-info max-w-100 rounded-md">${data}</div>`;
+                                   
+                                   switch (data) {
+                                                case 'Demo':
+                                                return `<div class="py-2 mt-3 text-gray-700 text-center bg-gray-200 ess max-w-100 rounded-md">${data}</div>`;
+
+                                                case 'Live':
+                                                return `<div class="py-2 mt-3 text-white text-center bg-success ess max-w-100 rounded-md">${data}</div>`;
+  
+                                                case 'Launched':
+                                                return `<div class="py-2 mt-3 text-white text-center bg-info ess max-w-100 rounded-md">${data}</div>`;
+
+                                                default:
+                                                return `<div class="py-2 mt-3 text-white text-center bg-teal ess max-w-100 rounded-md">${data}</div>`;
+                                        }
                                 }
                         },
-                        {data:'author_name',title:'Author Name',className:'align-top max-w-250',
+                        {data:'author_name',title:'AUTHOR NAME',className:'align-top max-w-250',
                                 render: function(data, type, row, meta) {
 
                                 return data +
@@ -31,10 +44,10 @@
                                 '';
                                         
                         }},
-                        {data:'name',title:'Added By',className:'align-top'},
-                        {data:'assign_user',title:'Assigned To',className:'align-top'},
+                        {data:'name',title:'ADDED BY',className:'align-top'},
+                        {data:'assign_user',title:'ASSIGNED TO',className:'align-top'},
   
-                        {data:'progress_comment',title:'Progress Notes',className:'align-top max-w-250 md:max-w-full',
+                        {data:'progress_comment',title:'PROGRESS NOTES',className:'align-top max-w-250 md:max-w-full',
                         render: function(data, type, row, meta) {
                                 return `<div class="overflow-y-auto max-h-100"> ${data.replace(/\n/g, "<br>")} </div>`;
                         }}
@@ -47,9 +60,9 @@
                 lengthMenu: [10, 25, 50, 100, 500],
                 dom: "<'row'<'col-sm-12 col-md-12'Blfrtip>>",  
                 buttons: [
-                        { extend: 'pdf', text: 'PDF',className:'bg-danger px-3 py-2 mb-4 text-white rounded-md poppins text-sm'},
-                        { extend: 'csv', text: 'CSV',className:'bg-teal px-3 py-2 mb-4 text-white rounded-md poppins text-sm'},
-                        { extend: 'print', text: 'Print',className:'bg-secondary px-3 py-2 mb-4 text-white rounded-md poppins text-sm',
+                        { extend: '', text: 'PDF',className:'bg-danger px-3 py-2 mb-4 text-white rounded-md poppins text-sm'},
+                        { extend: '', text: 'CSV',className:'bg-teal px-3 py-2 mb-4 text-white rounded-md poppins text-sm'},
+                        { extend: '', text: 'Print',className:'bg-secondary px-3 py-2 mb-4 text-white rounded-md poppins text-sm',
                           title:'Websites',
                           exportOptions: {
                                 modifier: {
@@ -57,7 +70,7 @@
                                         }
                                 }  
                         }, 
-                        { extend: 'excel', text: 'Excel',className:'bg-success px-3 py-2 mb-4 text-white rounded-md poppins text-sm',},    
+                        { extend: '', text: 'Excel',className:'bg-success px-3 py-2 mb-4 text-white rounded-md poppins text-sm',},    
                 ],
                 
         
@@ -68,7 +81,7 @@
         function confirmDelete(author_name){
 
                 Swal.fire({
-                text: 'Are you sure to delete record of '+author_name,
+                text: 'Are you sure to delete records of '+author_name,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Yes',
