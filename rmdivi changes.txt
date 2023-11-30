@@ -1,0 +1,88 @@
+<x-layout>
+    
+        <!--Websites Section-->
+        <section class="roboto mx-auto mt-20 bg-white rounded-lg card max-w-1175 mb-5 text-gray-900">
+        
+                <div class="mb-5 p-4 border-b border-veryLightyGray">Manage Websites</div>
+                <div class="custom-page-length"></div>
+                <div class="p-4">
+                        <table id="websitesDataTable" class=" responsive nowrap pt-4" width="100%">
+                        </table>
+                </div>
+            
+        </section>
+ <script>    
+        // datatable
+        const websitesRecord = @json($websites);
+        let table = new DataTable('#websitesDataTable', {
+                data:websitesRecord,
+                columns:[
+                        {data:'id',title:'ID',className:'align-top hidden'},
+                        {data:'status',title:'Status',className:'align-top w-32',   
+                                render: function(data, type, row, meta) {
+                                   return `<div class="py-2 mt-3 text-white text-center bg-info max-w-100 rounded-md">${data}</div>`;
+                                }
+                        },
+                        {data:'author_name',title:'Author Name',className:'align-top max-w-250',
+                                render: function(data, type, row, meta) {
+
+                                return data +
+                                `<x-buttons.datatable-website-buttons url="${row.latest_url}" id="${row.id}"  name="${data}" />`+
+                                '';
+                                        
+                        }},
+                        {data:'name',title:'Added By',className:'align-top'},
+                        {data:'assign_user',title:'Assigned To',className:'align-top'},
+  
+                        {data:'progress_comment',title:'Progress Notes',className:'align-top max-w-250',
+                        render: function(data, type, row, meta) {
+                                return `<div class="overflow-y-auto max-h-100"> ${data.replace(/\n/g, "<br>")} </div>`;
+                        }}
+                        ],
+                        createdRow: function(row, data, dataIndex) {
+                                $(row).find('td').attr('height', '100');
+                        },
+                        order: [[0, 'desc']],
+                responsive: true,
+                lengthMenu: [10, 25, 50, 100, 500],
+                dom: "<'row'<'col-sm-12 col-md-12'Blfrtip>>",  
+                buttons: [
+                        { extend: 'pdf', text: 'PDF',className:'bg-danger px-3 py-2 mb-4 text-white rounded-md poppins text-sm'},
+                        { extend: 'csv', text: 'CSV',className:'bg-teal px-3 py-2 mb-4 text-white rounded-md poppins text-sm'},
+                        { extend: 'print', text: 'Print',className:'bg-secondary px-3 py-2 mb-4 text-white rounded-md poppins text-sm',
+                          title:'Websites',
+                          exportOptions: {
+                                modifier: {
+                                        page: 'current'
+                                        }
+                                }  
+                        }, 
+                        { extend: 'excel', text: 'Excel',className:'bg-success px-3 py-2 mb-4 text-white rounded-md poppins text-sm',},    
+                ],
+                
+        
+        });
+
+
+        // alert for deleting website
+        function confirmDelete(author_name){
+
+                Swal.fire({
+                text: 'Are you sure to delete record of '+author_name,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+                customClass: {
+                        container: 'sweetAlert-custom-class' // Apply the custom class to the modal container
+                        }
+                }).then((result) => {
+                if (result.isConfirmed) {
+                        document.getElementById("deleteWebsite").submit();
+                } 
+                });
+        }
+
+
+</script>
+</x-layout>
