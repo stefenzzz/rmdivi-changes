@@ -17,7 +17,7 @@
         let table = new DataTable('#websitesDataTable', {
                 data:websitesRecord,
                 columns:[
-                        {data:'id',title:'ID',className:'align-top hidden'},
+                        {data:'id',title:'ID',className:'align-top hidden md:block'},
                         {data:'status',title:'Status',className:'align-top w-32',   
                                 render: function(data, type, row, meta) {
                                    return `<div class="py-2 mt-3 text-white text-center bg-info max-w-100 rounded-md">${data}</div>`;
@@ -34,7 +34,7 @@
                         {data:'name',title:'Added By',className:'align-top'},
                         {data:'assign_user',title:'Assigned To',className:'align-top'},
   
-                        {data:'progress_comment',title:'Progress Notes',className:'align-top max-w-250',
+                        {data:'progress_comment',title:'Progress Notes',className:'align-top max-w-250 md:max-w-full',
                         render: function(data, type, row, meta) {
                                 return `<div class="overflow-y-auto max-h-100"> ${data.replace(/\n/g, "<br>")} </div>`;
                         }}
